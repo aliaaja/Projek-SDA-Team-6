@@ -1,1 +1,21 @@
+class Kendaraan:
+    def __init__(self, id_kendaraan, jenis_kendaraan, nama_driver, kapasitas, ketersediaan):
+        self.id_kendaraan = id_kendaraan
+        self.jenis_kendaraan = jenis_kendaraan
+        self.nama_driver = nama_driver
+        self.kapasitas = kapasitas
+        self.ketersediaan = ketersediaan
 
+    def __str__(self):
+        return f"ID: {self.id_kendaraan}, Jenis: {self.jenis_kendaraan}, Driver: {self.nama_driver}, Kapasitas: {self.kapasitas}, Tersedia: {self.ketersediaan}"
+
+class Pemesanan:
+    def __init__(self, id_pemesanan, nama_pelanggan, id_kendaraan, lokasi_jemput, lokasi_tujuan):
+        self.id_pemesanan = id_pemesanan
+        self.nama_pelanggan = nama_pelanggan
+        self.id_kendaraan = id_kendaraan
+        self.lokasi_jemput = lokasi_jemput
+        self.lokasi_tujuan = lokasi_tujuan
+
+    def __str__(self):
+        return f"ID Pemesanan: {self.id_pemesanan}, Pelanggan: {self.nama_pelanggan}, ID Kendaraan: {self.id_kendaraan}, Jemput: {self.lokasi_jemput}, Tujuan: {self.lokasi_tujuan}"
