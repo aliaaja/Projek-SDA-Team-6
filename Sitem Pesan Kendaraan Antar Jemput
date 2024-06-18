@@ -60,3 +60,15 @@ def tambah_kendaraan(self, id_kendaraan, jenis_kendaraan, nama_driver, kapasitas
         kendaraan_baru = Kendaraan(id_kendaraan, jenis_kendaraan, nama_driver, kapasitas, ketersediaan)
         self.list_kendaraan.append(kendaraan_baru)
         messagebox.showinfo("Berhasil", f"Kendaraan {id_kendaraan} berhasil ditambahkan.")
+
+def cari_kendaraan_tersedia(self, jenis_kendaraan):
+        for kendaraan in self.list_kendaraan:
+            if kendaraan.jenis_kendaraan == jenis_kendaraan and kendaraan.ketersediaan:
+                return kendaraan
+        return None
+
+    def atur_ketersediaan_kendaraan(self, id_kendaraan, ketersediaan):
+        for kendaraan in self.list_kendaraan:
+            if kendaraan.id_kendaraan == id_kendaraan:
+                kendaraan.ketersediaan = ketersediaan
+                return
