@@ -29,6 +29,20 @@ class ManajemenKendaraan:
             return None
         return "\n".join(str(kendaraan) for kendaraan in self.list_kendaraan)
 
+def update_kendaraan(self, id_kendaraan, jenis_kendaraan=None, nama_driver=None, kapasitas=None, ketersediaan=None):
+        for kendaraan in self.list_kendaraan:
+            if kendaraan.id_kendaraan == id_kendaraan:
+                if jenis_kendaraan:
+                    kendaraan.jenis_kendaraan = jenis_kendaraan
+                if nama_driver:
+                    kendaraan.nama_driver = nama_driver
+                if kapasitas is not None:
+                    kendaraan.kapasitas = kapasitas
+                if ketersediaan is not None:
+                    kendaraan.ketersediaan = ketersediaan
+                messagebox.showinfo("Berhasil", f"Kendaraan {id_kendaraan} berhasil diperbarui.")
+                return
+        messagebox.showwarning("Error", f"Tidak ada kendaraan dengan ID {id_kendaraan}")
 
 
 
