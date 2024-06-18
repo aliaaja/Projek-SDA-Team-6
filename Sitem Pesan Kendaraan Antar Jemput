@@ -52,4 +52,11 @@ def hapus_kendaraan(self, id_kendaraan):
                 return
         messagebox.showwarning("Error", f"Tidak ada kendaraan dengan ID {id_kendaraan}")
 
-
+def tambah_kendaraan(self, id_kendaraan, jenis_kendaraan, nama_driver, kapasitas, ketersediaan):
+        for kendaraan in self.list_kendaraan:
+            if kendaraan.id_kendaraan == id_kendaraan:
+                messagebox.showwarning("Error", f"Kendaraan dengan ID {id_kendaraan} sudah ada.")
+                return
+        kendaraan_baru = Kendaraan(id_kendaraan, jenis_kendaraan, nama_driver, kapasitas, ketersediaan)
+        self.list_kendaraan.append(kendaraan_baru)
+        messagebox.showinfo("Berhasil", f"Kendaraan {id_kendaraan} berhasil ditambahkan.")
