@@ -20,7 +20,14 @@ class PemesananKendaraan:
     def __str__(self):
         return f"ID Pemesanan: {self.id_pemesanan}, Pelanggan: {self.nama_pelanggan}, ID Kendaraan: {self.id_kendaraan}, Jemput: {self.lokasi_jemput}, Tujuan: {self.lokasi_tujuan}"
 
+class ManajemenKendaraan:
+    def __init__(self):
+        self.list_kendaraan = []
 
+    def daftar_kendaraan(self):
+        if not self.list_kendaraan:
+            return None
+        return "\n".join(str(kendaraan) for kendaraan in self.list_kendaraan)
 
 
 
