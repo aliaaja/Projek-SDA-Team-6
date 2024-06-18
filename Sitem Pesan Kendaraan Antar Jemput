@@ -44,5 +44,12 @@ def update_kendaraan(self, id_kendaraan, jenis_kendaraan=None, nama_driver=None,
                 return
         messagebox.showwarning("Error", f"Tidak ada kendaraan dengan ID {id_kendaraan}")
 
+def hapus_kendaraan(self, id_kendaraan):
+        for kendaraan in self.list_kendaraan:
+            if kendaraan.id_kendaraan == id_kendaraan:
+                self.list_kendaraan.remove(kendaraan)
+                messagebox.showinfo("Berhasil", f"Kendaraan {id_kendaraan} berhasil dihapus.")
+                return
+        messagebox.showwarning("Error", f"Tidak ada kendaraan dengan ID {id_kendaraan}")
 
 
