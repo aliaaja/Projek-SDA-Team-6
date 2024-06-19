@@ -135,3 +135,34 @@ class AplikasiPemesanan:
 
         self.keluar_button = tk.Button(self.frame, text="Keluar", command=root.quit)
         self.keluar_button.grid(row=5, columnspan=2, pady=10)
+
+    def daftar_kendaraan(self):
+        kendaraan = self.manajemen_kendaraan.daftar_kendaraan()
+        if kendaraan is None:
+            messagebox.showinfo("Kendaraan Tidak Tersedia", "Kendaraan tidak tersedia saat ini.")
+        else:
+            messagebox.showinfo("Daftar Kendaraan", kendaraan)
+
+    def pesan_kendaraan(self):
+        self.booking_window = tk.Toplevel(self.root)
+        self.booking_window.title("Pesan Kendaraan")
+        self.booking_frame = tk.Frame(self.booking_window, pady=10, padx=10)
+        self.booking_frame.pack()
+
+        tk.Label(self.booking_frame, text="Nama Pelanggan").grid(row=0, column=0, sticky="w")
+        self.nama_pelanggan_entry = tk.Entry(self.booking_frame)
+        self.nama_pelanggan_entry.grid(row=0, column=1)
+
+        tk.Label(self.booking_frame, text="Jenis Kendaraan (motor/mobil)").grid(row=1, column=0, sticky="w")
+        self.jenis_kendaraan_entry = tk.Entry(self.booking_frame)
+        self.jenis_kendaraan_entry.grid(row=1, column=1)
+
+        tk.Label(self.booking_frame, text="Lokasi Jemput").grid(row=2, column=0, sticky="w")
+        self.lokasi_jemput_entry = tk.Entry(self.booking_frame)
+        self.lokasi_jemput_entry.grid(row=2, column=1)
+
+        tk.Label(self.booking_frame, text="Lokasi Tujuan").grid(row=3, column=0, sticky="w")
+        self.lokasi_tujuan_entry = tk.Entry(self.booking_frame)
+        self.lokasi_tujuan_entry.grid(row=3, column=1)
+
+        tk.Button(self.booking_frame, text="Pesan", command=self.konfirmasi_pemesanan).grid(row=4, columnspan=2, pady=10)
