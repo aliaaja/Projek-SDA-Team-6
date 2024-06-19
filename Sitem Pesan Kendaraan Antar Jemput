@@ -167,7 +167,7 @@ class AplikasiPemesanan:
 
         tk.Button(self.booking_frame, text="Pesan", command=self.konfirmasi_pemesanan).grid(row=4, columnspan=2, pady=10)
 
-def konfirmasi_pemesanan(self):
+    def konfirmasi_pemesanan(self):
         nama_pelanggan = self.nama_pelanggan_entry.get()
         jenis_kendaraan = self.jenis_kendaraan_entry.get()
         lokasi_jemput = self.lokasi_jemput_entry.get()
@@ -207,3 +207,55 @@ def konfirmasi_pemesanan(self):
         self.ketersediaan_entry.grid(row=4, column=1)
 
         tk.Button(self.add_frame, text="Tambah", command=self.konfirmasi_tambah_kendaraan).grid(row=5, columnspan=2, pady=10)
+
+    def konfirmasi_tambah_kendaraan(self):
+        id_kendaraan = self.id_kendaraan_entry.get()
+        jenis_kendaraan = self.jenis_kendaraan_entry.get()
+        nama_driver = self.nama_driver_entry.get()
+        kapasitas = self.kapasitas_entry.get()
+        ketersediaan = self.ketersediaan_entry.get()
+
+        if not id_kendaraan or not jenis_kendaraan or not nama_driver or not kapasitas or not ketersediaan:
+            messagebox.showwarning("Input Error", "Semua field harus diisi!")
+            return
+
+        try:
+            kapasitas = int(kapasitas)
+            ketersediaan = ketersediaan.lower() == 'true'
+        except ValueError:
+            messagebox.showwarning("Input Error", "Kapasitas harus berupa angka dan ketersediaan harus True atau False.")
+            return
+
+        self.manajemen_kendaraan.tambah_kendaraan(id_kendaraan, jenis_kendaraan, nama_driver, kapasitas, ketersediaan)
+        self.add_window.destroy()
+
+    def update_kendaraan(self):
+        self.update_window = tk.Toplevel(self.root)
+        self.update_window.title("Perbarui Kendaraan")
+        self.update_frame = tk.Frame(self.update_window, pady=10, padx=10)
+        self.update_frame.pack()
+
+        tk.Label(self.update_frame, text="ID Kendaraan", anchor="w").grid(row=0, column=0, sticky="w")
+        self.perbarui_id_kendaraan_entry = tk.Entry(self.update_frame)
+        self.perbarui_id_kendaraan_entry.grid(row=0, column=1)
+
+        tk.Label(self.update_frame, text="Jenis Kendaraan (motor/mobil)", anchor="w").grid(row=1, column=0, sticky="w")
+        self.perbarui_jenis_kendaraan_entry = tk.Entry(self.update_frame)
+        self.perbarui_jenis_kendaraan_entry.grid(row=1, column=1)
+
+        tk.Label(self.update_frame, text="Nama Driver", anchor="w").grid(row=2, column=0, sticky="w")
+        self.perbarui_nama_driver_entry = tk.Entry(self.update_frame)
+        self.perbarui_nama_driver_entry.grid(row=2, column=1)
+
+        tk.Label(self.update_frame, text="Kapasitas", anchor="w").grid(row=3, column=0, sticky="w")
+        self.perbarui_kapasitas_entry = tk.Entry(self.update_frame)
+        self.perbarui_kapasitas_entry.grid(row=3, column=1)
+
+        tk.Label(self.update_frame, text="Ketersediaan (True/False)", anchor="w").grid(row=4, column=0, sticky="w")
+        self.perbarui_ketersediaan_entry = tk.Entry(self.update_frame)
+        self.perbarui_ketersediaan_entry.grid(row=4, column=1)
+
+        tk.Button(self.update_frame, text="Perbarui", command=self.konfirmasi_update_kendaraan).grid(row=5, columnspan=2, pady=10)
+
+
+        tk.Button(self.update_frame, text="Perbarui", command=self.konfirmasi_update_kendaraan).grid(row=5, columnspan=2, pady=10)
