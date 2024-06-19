@@ -292,3 +292,18 @@ class AplikasiPemesanan:
         self.hapus_id_kendaraan_entry.grid(row=0, column=1)
 
         tk.Button(self.delete_frame, text="Hapus", command=self.konfirmasi_hapus_kendaraan).grid(row=1, columnspan=2, pady=10)
+
+def konfirmasi_hapus_kendaraan(self):
+        id_kendaraan = self.hapus_id_kendaraan_entry.get()
+
+        if not id_kendaraan:
+            messagebox.showwarning("Input Error", "ID Kendaraan harus diisi!")
+            return
+
+        self.manajemen_kendaraan.hapus_kendaraan(id_kendaraan)
+        self.delete_window.destroy()
+
+if _name_ == "_main_":
+    root = tk.Tk()
+    app = AplikasiPemesanan(root)
+    root.mainloop()
