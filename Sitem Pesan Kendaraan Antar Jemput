@@ -29,7 +29,7 @@ class ManajemenKendaraan:
             return None
         return "\n".join(str(kendaraan) for kendaraan in self.list_kendaraan)
 
-def update_kendaraan(self, id_kendaraan, jenis_kendaraan=None, nama_driver=None, kapasitas=None, ketersediaan=None):
+    def update_kendaraan(self, id_kendaraan, jenis_kendaraan=None, nama_driver=None, kapasitas=None, ketersediaan=None):
         for kendaraan in self.list_kendaraan:
             if kendaraan.id_kendaraan == id_kendaraan:
                 if jenis_kendaraan:
@@ -44,7 +44,7 @@ def update_kendaraan(self, id_kendaraan, jenis_kendaraan=None, nama_driver=None,
                 return
         messagebox.showwarning("Error", f"Tidak ada kendaraan dengan ID {id_kendaraan}")
 
-def hapus_kendaraan(self, id_kendaraan):
+    def hapus_kendaraan(self, id_kendaraan):
         for kendaraan in self.list_kendaraan:
             if kendaraan.id_kendaraan == id_kendaraan:
                 self.list_kendaraan.remove(kendaraan)
@@ -52,7 +52,7 @@ def hapus_kendaraan(self, id_kendaraan):
                 return
         messagebox.showwarning("Error", f"Tidak ada kendaraan dengan ID {id_kendaraan}")
 
-def tambah_kendaraan(self, id_kendaraan, jenis_kendaraan, nama_driver, kapasitas, ketersediaan):
+    def tambah_kendaraan(self, id_kendaraan, jenis_kendaraan, nama_driver, kapasitas, ketersediaan):
         for kendaraan in self.list_kendaraan:
             if kendaraan.id_kendaraan == id_kendaraan:
                 messagebox.showwarning("Error", f"Kendaraan dengan ID {id_kendaraan} sudah ada.")
@@ -61,7 +61,7 @@ def tambah_kendaraan(self, id_kendaraan, jenis_kendaraan, nama_driver, kapasitas
         self.list_kendaraan.append(kendaraan_baru)
         messagebox.showinfo("Berhasil", f"Kendaraan {id_kendaraan} berhasil ditambahkan.")
 
-def cari_kendaraan_tersedia(self, jenis_kendaraan):
+    def cari_kendaraan_tersedia(self, jenis_kendaraan):
         for kendaraan in self.list_kendaraan:
             if kendaraan.jenis_kendaraan == jenis_kendaraan and kendaraan.ketersediaan:
                 return kendaraan
@@ -72,3 +72,31 @@ def cari_kendaraan_tersedia(self, jenis_kendaraan):
             if kendaraan.id_kendaraan == id_kendaraan:
                 kendaraan.ketersediaan = ketersediaan
                 return
+    def atur_ketersediaan_kendaraan(self, id_kendaraan, ketersediaan):
+        for kendaraan in self.list_kendaraan:
+            if kendaraan.id_kendaraan == id_kendaraan:
+                kendaraan.ketersediaan = ketersediaan
+                return
+
+class Pemesanan:
+    def __init__(self, manajemen_kendaraan):
+        self.manajemen_kendaraan = manajemen_kendaraan
+        self.list_pemesanan = []
+        self.counter_id_pemesanan = 1
+
+    def pesan_kendaraan(self, nama_pelanggan, jenis_kendaraan, lokasi_jemput, lokasi_tujuan):
+        kendaraan = self.manajemen_kendaraan.cari_kendaraan_tersedia(jenis_kendaraan)
+        if kendaraan:
+            kendaraan.ketersediaan = False
+            pemesanan = PemesananKendaraan(
+                id_pemesanan=self.counter_id_pemesanan,
+                nama_pelanggan=nama_pelanggan,
+                id_kendaraan=kendaraan.id_kendaraan,
+                lokasi_jemput=lokasi_jemput,
+                lokasi_tujuan=lokasi_tujuan
+            )
+            self.list_pemesanan.append(pemesanan)
+            self.counter_id_pemesanan += 1
+            messagebox.showinfo("Berhasil", f"Pemesanan berhasil: {pemesanan}")
+        else:
+            messagebox.showwarning("Tidak Ada Kendaraan", "Tidak ada kendaraan tersedia untuk jenis yang dipilih.")
