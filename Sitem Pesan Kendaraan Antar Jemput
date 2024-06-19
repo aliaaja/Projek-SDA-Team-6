@@ -259,3 +259,36 @@ class AplikasiPemesanan:
 
 
         tk.Button(self.update_frame, text="Perbarui", command=self.konfirmasi_update_kendaraan).grid(row=5, columnspan=2, pady=10)
+
+    def konfirmasi_update_kendaraan(self):
+        id_kendaraan = self.perbarui_id_kendaraan_entry.get()
+        jenis_kendaraan = self.perbarui_jenis_kendaraan_entry.get()
+        nama_driver = self.perbarui_nama_driver_entry.get()
+        kapasitas = self.perbarui_kapasitas_entry.get()
+        ketersediaan = self.perbarui_ketersediaan_entry.get()
+
+        if not id_kendaraan:
+            messagebox.showwarning("Input Error", "ID Kendaraan harus diisi!")
+            return
+
+        try:
+            kapasitas = int(kapasitas) if kapasitas else None
+            ketersediaan = ketersediaan.lower() == 'true' if ketersediaan else None
+        except ValueError:
+            messagebox.showwarning("Input Error", "Kapasitas harus berupa angka dan ketersediaan harus True atau False.")
+            return
+
+        self.manajemen_kendaraan.update_kendaraan(id_kendaraan, jenis_kendaraan, nama_driver, kapasitas, ketersediaan)
+        self.update_window.destroy()
+
+    def hapus_kendaraan(self):
+        self.delete_window = tk.Toplevel(self.root)
+        self.delete_window.title("Hapus Kendaraan")
+        self.delete_frame = tk.Frame(self.delete_window, pady=10, padx=10)
+        self.delete_frame.pack()
+
+        tk.Label(self.delete_frame, text="ID Kendaraan").grid(row=0, column=0, sticky="e")
+        self.hapus_id_kendaraan_entry = tk.Entry(self.delete_frame)
+        self.hapus_id_kendaraan_entry.grid(row=0, column=1)
+
+        tk.Button(self.delete_frame, text="Hapus", command=self.konfirmasi_hapus_kendaraan).grid(row=1, columnspan=2, pady=10)
