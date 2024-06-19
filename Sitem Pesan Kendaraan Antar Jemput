@@ -166,3 +166,44 @@ class AplikasiPemesanan:
         self.lokasi_tujuan_entry.grid(row=3, column=1)
 
         tk.Button(self.booking_frame, text="Pesan", command=self.konfirmasi_pemesanan).grid(row=4, columnspan=2, pady=10)
+
+def konfirmasi_pemesanan(self):
+        nama_pelanggan = self.nama_pelanggan_entry.get()
+        jenis_kendaraan = self.jenis_kendaraan_entry.get()
+        lokasi_jemput = self.lokasi_jemput_entry.get()
+        lokasi_tujuan = self.lokasi_tujuan_entry.get()
+
+        if not nama_pelanggan or not jenis_kendaraan or not lokasi_jemput or not lokasi_tujuan:
+            messagebox.showwarning("Input Error", "Semua field harus diisi!")
+            return
+
+        self.sistem.pesan_kendaraan(nama_pelanggan, jenis_kendaraan, lokasi_jemput, lokasi_tujuan)
+        self.booking_window.destroy()
+
+    def tambah_kendaraan(self):
+        self.add_window = tk.Toplevel(self.root)
+        self.add_window.title("Tambah Kendaraan")
+        self.add_frame = tk.Frame(self.add_window, pady=10, padx=10)
+        self.add_frame.pack()
+
+        tk.Label(self.add_frame, text="ID Kendaraan").grid(row=0, column=0, sticky="w")
+        self.id_kendaraan_entry = tk.Entry(self.add_frame)
+        self.id_kendaraan_entry.grid(row=0, column=1)
+
+        tk.Label(self.add_frame, text="Jenis Kendaraan (motor/mobil)").grid(row=1, column=0, sticky="w")
+        self.jenis_kendaraan_entry = tk.Entry(self.add_frame)
+        self.jenis_kendaraan_entry.grid(row=1, column=1)
+
+        tk.Label(self.add_frame, text="Nama Driver").grid(row=2, column=0, sticky="w")
+        self.nama_driver_entry = tk.Entry(self.add_frame)
+        self.nama_driver_entry.grid(row=2, column=1)
+
+        tk.Label(self.add_frame, text="Kapasitas").grid(row=3, column=0, sticky="w")
+        self.kapasitas_entry = tk.Entry(self.add_frame)
+        self.kapasitas_entry.grid(row=3, column=1)
+
+        tk.Label(self.add_frame, text="Ketersediaan (True/False)").grid(row=4, column=0, sticky="w")
+        self.ketersediaan_entry = tk.Entry(self.add_frame)
+        self.ketersediaan_entry.grid(row=4, column=1)
+
+        tk.Button(self.add_frame, text="Tambah", command=self.konfirmasi_tambah_kendaraan).grid(row=5, columnspan=2, pady=10)
